@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+  <html>
+   <head>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/grids-responsive-min.css">
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'></script>
+    <script src='mapFactory.js'></script>
+    <script src='MainController.js'></script>
+    <script src='markerFactory.js'></script>
+    <link rel="stylesheet" href="/main.css" media="screen" title="no title" charset="utf-8">
+    <script src="app.js"></script>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <title>OnTheWay</title>
+   </head>
+   <body>
+     <div ng-app="bae-synchronous" ng-controller="MainController" class='mainContainer'>
+       <form class="pure-form pure-form-stacked">
+        <fieldset>
+        <legend>Legend</legend>
+        <div class="pure-g">
+           <div class="pure-u-1 pure-u-md-1-5">
+             <label for="home-address">Point A</label>
+             <input id="homeAddress" ng-model='homeAddress' class="pure-u-8.5-24" type="text" placeholder="Enter Origin Address">
+           </div>
+           <div class="pure-u-1 pure-u-md-1-5">
+             <label for="work-address">Point B</label>
+             <input id="workAddress" ng-model='workAddress' class="pure-u-8.5-24" type="text" placeholder="Enter Destination Address">
+           </div>
+           <div class="pure-u-1 pure-u-md-1-5">
+             <label for="category">Categories</label>
+             <select id="location" ng-required='!selectedPlace' ng-model='selectedPlace' class="pure-input-23-24 soflow">
+                 <option>Select an option</option>
+                 <option ng-repeat='place in places'>{{place}}</option>
+             </select>
+           </div>
+           <div class="pure-u-1 pure-u-md-1-5">
+             <label for="maximum-duration">Maximum Duration</label>
+             <select id="time" ng-model='time' class="pure-input-23-24 soflow">
+               <option value='5'>5 Minutes</option>
+               <option value='10'>10 Minutes</option>
+               <option value='15'>15 Minutes</option>
+               <option value='20'>20 Minutes</option>
+             </select>
+           </div>
+        </div>
+          <button id='submit' type="submit" value='submit' class="button-xlarge pure-button"
+           ng-click="postData()" ng-disabled='!homeAddress || !time || !workAddress || !selectedPlace'>Submit</button>
+       </fieldset>
+     </form>
+
+     <div class="splash-{{ splash }} jumbotron">
+         <div class="container">
+           <h1>On The Way</h1>
+           <div>
+             <p>Need to find a gym that's on your way home? Need a coffeeshop that's en route to your interview? Look no further.</p>
+             <p>Start by entering starting and ending addresses in the boxes above. Then, choose a category and a maximum travel time from the dropdowns. On The Way will find locations that fall within a chosen category that fall within a radius (determined by estimated travel time) of the optimal route between your starting and ending locations.</p>
+             <p>Go ahead, give it a shot!</p>
+           </div>
+         </div>
+       </div>
+
+       <div class="failure-{{ failure }} col-sm-12 jumbotron" >
+         <h1>Oops</h1>
+         <p>
+           There are no valid results for what you selected. Change some settings and try again!
+         </p>
+       </div>
+
+       <div class="pure-g" ng-if='submitted'>
+         <div class="pure-u-1-4">
+           <div class="results-wrap" ng-repeat='listing in categoryListings'>
+             <div class="results-data">
+               <div class="item-wrap">
+                <div class="item-data">{{ listing.name }}</div>
+               </div>
+               <div class="item-wrap">
+                 <span class='item-data'>{{ listing.timeFromAddress1 }} minutes from point A</span>
+               </div>
+               <div class="item-wrap">
+                 <span class='item-data'>{{ listing.timeFromAddress1 }} minutes from point B</span>
+               </div>
+               <div class="item-wrap" ng-if='listing.rating !== undefined'>
+                 <div class="">{{ listing.rating }}</div>
+               </div>
+            </div>
+           </div> <!-- results-data -->
+         </div>
+         <div class="pure-u-3-4">
+           <div class="map-wrap-{{ open_map }}" id='map-data'>
+            
+           </div>
+         </div>
+       </div>
+
+
+       <div id='mapDiv' class="mapDiv col-sm-9" ng-if="submitted">
+         <!-- <div id="map"></div> -->
+         <script type="text/javascript">
+            var mapData = document.getElementById('map-data');
+            function createMap() {
+              var map = document.createElement('div');
+              map.setAttribute("id", "map");
+              // map.style.width = "500px";
+              // map.style.height = "500px";
+              mapData.appendChild(map);
+              initMap();
+            }
+
+            window.onload = function() {
+              console.log("ready");
+              var search_button = document.getElementById("submit");
+              search_button.addEventListener("click", createMap);
+            }
+            var map;
+            function initMap() {
+              map = new google.maps.Map(document.getElementById('map'), {
+              center: {
+                lat: -34.397,
+                lng: 150.644
+              },
+              zoom: 8
+              });
+            }
+         </script>
+       </div>
+     </div>
+
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvXHQtnUPWtvPzT2M3u2VD1Pxqi7ihyfQ&callback=initMap"
+         async defer></script>
+     <script src='mapDisplay.js'></script>
+   </body>
+  </html>
