@@ -6,13 +6,20 @@
     <script src="https://code.jquery.com/jquery-2.2.2.min.js" integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular.js"></script>
     <script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore.js'></script>
+    <link href='https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc.5/angular-material.css' rel="stylesheet" type="text/css"></link>
+    <script src='https://cdn.gitcdn.link/cdn/angular/bower-material/v1.1.0-rc.5/angular-material.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-animate.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-messages.min.js'></script>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.5.5/angular-aria.min.js'></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <script src='mapFactory.js'></script>
     <script src='MainController.js'></script>
     <script src='markerFactory.js'></script>
     <link rel="stylesheet" href="/main.css" media="screen" title="no title" charset="utf-8">
     <script src="app.js"></script>
+    <script src='filters.js'></script>
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
     <title>OnTheWay</title>
    </head>
@@ -71,7 +78,20 @@
        </div>
 
        <div class='result-container' ng-if='submitted'>
-           <div class="result__listings" ng-repeat='listing in categoryListings'>
+         <div class="result__listing__wrap">
+           <md-card md-theme="dark-grey" ng-repeat='listing in categoryListings'>
+           <md-card-title>
+             <md-card-title-text>
+               <span class="md-headline">{{ listing.name }}</span>
+               <span class="md-subhead">Time From Point A: {{ listing.timeFromAddress1 }} {{ listing.timeFromAddress1 > 1 ? "minutes" : "minute" }}</span>
+               <span class="md-subhead">Time From Point B: {{ listing.timeFromAddress2 }} {{ listing.timeFromAddress2 > 1 ? "minutes" : "minute" }}</span>
+             </md-card-title-text>
+            </md-card-title>
+            <md-card-actions layout="row" layout-align="end center" ng-if='listing.rating !== undefined'>
+              <md-button><md-icon ng-repeat="n in [] | range:listing.rating">star_rate</md-icon>{{ listing.rating }}</md-button>
+            </md-card-actions>
+          </md-card>
+           <div class="result__listings">
              <div class="results__data">
                <div class="result__wrap">
                 <div class="result__name">{{ listing.name }}</div>
@@ -80,13 +100,14 @@
                  <span class='result__point--a'>{{ listing.timeFromAddress1 }} minutes from point A</span>
                </div>
                <div class="result__wrap">
-                 <span class='result__point-b'>{{ listing.timeFromAddress1 }} minutes from point B</span>
+                 <span class='result__point-b'>{{ listing.timeFromAddress2 }} minutes from point B</span>
                </div>
-               <div class="result__wrap" ng-if='listing.rating !== undefined'>
+               <div class="result__wrap">
                  <div class="result__rating">{{ listing.rating }}</div>
                </div>
             </div>
            </div> <!-- results-data -->
+         </div>
            <div class="map-wrap-{{ open_map }}" id='map-data'>
              <!-- needs this div map-container set to height 100% and width 100% or else it won't render properly -->
              <div class="map-container">

@@ -22,6 +22,7 @@ angular.module('bae-synchronous.MainController', [])
       }
     };
 
+
     $scope.splash_submit = function() { $scope.splash = 'no'; };
     $scope.expand_map = function() { $scope.open_map = 'yes'; };
 
