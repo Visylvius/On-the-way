@@ -70,30 +70,29 @@
          </p>
        </div>
 
-       <div class="pure-g" ng-if='submitted'>
-         <div class="pure-u-1-4">
-           <div class="results-wrap" ng-repeat='listing in categoryListings'>
-             <div class="results-data">
-               <div class="item-wrap">
-                <div class="item-data">{{ listing.name }}</div>
+       <div class='result-container' ng-if='submitted'>
+           <div class="result__listings" ng-repeat='listing in categoryListings'>
+             <div class="results__data">
+               <div class="result__wrap">
+                <div class="result__name">{{ listing.name }}</div>
                </div>
-               <div class="item-wrap">
-                 <span class='item-data'>{{ listing.timeFromAddress1 }} minutes from point A</span>
+               <div class="result__wrap">
+                 <span class='result__point--a'>{{ listing.timeFromAddress1 }} minutes from point A</span>
                </div>
-               <div class="item-wrap">
-                 <span class='item-data'>{{ listing.timeFromAddress1 }} minutes from point B</span>
+               <div class="result__wrap">
+                 <span class='result__point-b'>{{ listing.timeFromAddress1 }} minutes from point B</span>
                </div>
-               <div class="item-wrap" ng-if='listing.rating !== undefined'>
-                 <div class="">{{ listing.rating }}</div>
+               <div class="result__wrap" ng-if='listing.rating !== undefined'>
+                 <div class="result__rating">{{ listing.rating }}</div>
                </div>
             </div>
            </div> <!-- results-data -->
-         </div>
-         <div class="pure-u-3-4">
            <div class="map-wrap-{{ open_map }}" id='map-data'>
-            
+             <!-- needs this div map-container set to height 100% and width 100% or else it won't render properly -->
+             <div class="map-container">
+              <div id='map'></div>
+             </div>
            </div>
-         </div>
        </div>
 
 
@@ -101,19 +100,10 @@
          <!-- <div id="map"></div> -->
          <script type="text/javascript">
             var mapData = document.getElementById('map-data');
-            function createMap() {
-              var map = document.createElement('div');
-              map.setAttribute("id", "map");
-              // map.style.width = "500px";
-              // map.style.height = "500px";
-              mapData.appendChild(map);
-              initMap();
-            }
-
             window.onload = function() {
               console.log("ready");
-              var search_button = document.getElementById("submit");
-              search_button.addEventListener("click", createMap);
+              var search_button = document.getElementById('submit');
+              search_button.addEventListener("click", initMap);
             }
             var map;
             function initMap() {
@@ -123,13 +113,13 @@
                 lng: 150.644
               },
               zoom: 8
-              });
+             });
             }
          </script>
        </div>
      </div>
 
-     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvXHQtnUPWtvPzT2M3u2VD1Pxqi7ihyfQ&callback=initMap"
+     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvXHQtnUPWtvPzT2M3u2VD1Pxqi7ihyfQ"
          async defer></script>
      <script src='mapDisplay.js'></script>
    </body>

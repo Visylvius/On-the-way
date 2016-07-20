@@ -72,9 +72,16 @@ input {
   display: inline-block;
 }
 
-#map {
+.map-container {
+  position: absolute;
   width: 100%;
-  height: 715px;
+  height: 100%;
+}
+#map {
+    height: 100% !important;
+    padding-bottom: 50%;
+    position: relative;
+    width: 100%;
 }
 
 .mapDiv {
@@ -130,6 +137,12 @@ select.soflow {
   box-sizing: border-box;
 }
 
+.result-container {
+  display: flex;
+}
+
+
+
 .results-wrap { border: .05px solid #D0D4D9; width: 200px; outline: 1px solid yellow;  }
 .results-data { outline: 1px solid blue; background-color: #F4F4F4; height: 100%; padding: 10px; }
 .item-wrap { outline: 1px solid black; height: 100%; width: 100px; margin: 0 auto;}
@@ -138,5 +151,5 @@ background-color: white;}
 .splash-no { display: none; }
 .failure-yes { display: block; }
 .failure-no { display: none; }
-.map-wrap-yes { width: 100%; height: 80%; transition: height 2s; outline: 1px solid #eee; display: inline-block;}
+.map-wrap-yes { width: 100%; height: 100%; display: inline-block;}
 /*.map-wrap-no { display: none; height: 0; transition: height 2s; }*/
