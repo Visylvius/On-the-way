@@ -91,22 +91,7 @@
               <md-button><md-icon ng-repeat="n in [] | range:listing.rating">star_rate</md-icon>{{ listing.rating }}</md-button>
             </md-card-actions>
           </md-card>
-           <div class="result__listings">
-             <div class="results__data">
-               <div class="result__wrap">
-                <div class="result__name">{{ listing.name }}</div>
-               </div>
-               <div class="result__wrap">
-                 <span class='result__point--a'>{{ listing.timeFromAddress1 }} minutes from point A</span>
-               </div>
-               <div class="result__wrap">
-                 <span class='result__point-b'>{{ listing.timeFromAddress2 }} minutes from point B</span>
-               </div>
-               <div class="result__wrap">
-                 <div class="result__rating">{{ listing.rating }}</div>
-               </div>
-            </div>
-           </div> <!-- results-data -->
+            <!-- results-data -->
          </div>
            <div class="map-wrap-{{ open_map }}" id='map-data'>
              <!-- needs this div map-container set to height 100% and width 100% or else it won't render properly -->
@@ -115,9 +100,6 @@
              </div>
            </div>
        </div>
-
-
-       <div id='mapDiv' class="mapDiv col-sm-9" ng-if="submitted">
          <!-- <div id="map"></div> -->
          <script type="text/javascript">
             var mapData = document.getElementById('map-data');
