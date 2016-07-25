@@ -12,11 +12,7 @@ angular.module('bae-synchronous.MainController', [])
     $scope.open_map = 'no';
     $scope.splash = 'yes';
     $scope.failure = 'no';
-    $scope.homeAddress = '998 lundy lane los altos';
-    $scope.workAddress = '998 lundy lane los altos';
-    $scope.time = '10';
-
-
+  
     $scope.hasFailed = function() {
       if (!$scope.validListings) {
         $scope.failure = 'yes' ;
