@@ -25,17 +25,24 @@ angular.module('bae-synchronous.MainController', [])
     $scope.postData = function() {
       //pass in the model data into the Map factory
       $scope.submitted = true;
+      console.log('listings ' + $scope.validListings);
       Map.postData($scope.homeAddress, $scope.workAddress, $scope.selectedPlace, $scope.time)
       .then(function(data, err) {
         if (err) {
           $scope.hasFailed();
           console.log('error message', err);
         } else {
+          if (!$scope.validListings) {
+            $scope.failure = 'yes';
+          }
           $scope.splash_submit();
           $scope.listings = data;
           $scope.categoryListings = data.categoryListings;
             if($scope.categoryListings.length > 0) {
               $scope.validListings = true;
+              if ($scope.validListings) {
+                $scope.failure = 'no';
+              }
               var marker3 = Marker.makeMarker($scope.listings.address1.coordinates, map);
               var marker4 = Marker.makeMarker($scope.listings.address2.coordinates, map);
 
@@ -68,14 +75,14 @@ angular.module('bae-synchronous.MainController', [])
               this.setOptions({scrollwheel: true});
             });
             google.maps.event.addListener(map, 'mouseout', function(event){
-              this.setOptions({scrollwheel:false});
+              this.setOptions({scrollwheel: false});
             });
             console.log('were here');
             $scope.open_map = 'yes';
+            google.maps.event.trigger(map, "resize");
           }
           else {
             $scope.validListings = false;
-            $scope.hasFailed();
           }
       }
     });
