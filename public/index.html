@@ -83,8 +83,8 @@
            <md-card-title>
              <md-card-title-text>
                <span class="md-headline">{{ listing.name }}</span>
-               <span class="md-subhead">Time From Point A: {{ listing.timeFromAddress1 }} {{ listing.timeFromAddress1 > 1 ? "minutes" : "minute" }}</span>
-               <span class="md-subhead">Time From Point B: {{ listing.timeFromAddress2 }} {{ listing.timeFromAddress2 > 1 ? "minutes" : "minute" }}</span>
+               <span class="md-subhead">Time From Point A: <br />{{ listing.timeFromAddress1 }} {{ listing.timeFromAddress1 > 1 ? "minutes" : "minute" }}</span>
+               <span class="md-subhead">Time From Point B: <br />{{ listing.timeFromAddress2 }} {{ listing.timeFromAddress2 > 1 ? "minutes" : "minute" }}</span>
              </md-card-title-text>
             </md-card-title>
             <md-card-actions layout="row" layout-align="end center" ng-if='listing.rating !== undefined'>
@@ -124,6 +124,5 @@
 
      <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAvXHQtnUPWtvPzT2M3u2VD1Pxqi7ihyfQ"
          async defer></script>
-     <script src='mapDisplay.js'></script>
    </body>
   </html>

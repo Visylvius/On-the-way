@@ -60,15 +60,6 @@ input {
   width: 250px;
 }
 
-.listDiv {
-  padding: 15px;
-  color: white;
-  height: 730px;
-  max-height: 730px;
-  padding-top: 15px;
-  overflow-y: scroll;;
-}
-
 .location {
   padding: 10px;
 }
@@ -153,10 +144,19 @@ select.soflow {
 
 }
 
-.result__listings {
-  width: 100%;
-  margin-bottom: 10px;
+
+.pure-form-stacked {
+  margin-left: 14px;
 }
+
+md-card:first-child {
+  margin-top: 0px;
+}
+
+md-card:last-child {
+  margin-bottom: 0px;
+}
+
 .result__listing__wrap {
   display: block;
   width: 20%;
@@ -168,17 +168,23 @@ select.soflow {
   padding-top: 0;
 }
 
-md-card:first-child {
-  margin-top: 0px;
+@media (max-width: 900px) {
+  .result-container {
+    flex-direction: column;
+  }
+  .result__listing__wrap {
+    width: 100%;
+    height: 400px;
+    oveflow-y: hidden;
+    overflow-x: scroll;
+  }
 }
 
-md-card:last-child {
-  margin-bottom: 0px;
-}
-
-.pure-form-stacked {
-  margin-left: 14px;
-}
+/*@media (min-width: 600) {
+  .result-container {
+    flex-direction: column;
+  }
+}*/
 .result-wrap { border: .05px solid #D0D4D9; width: 200px; outline: 1px solid yellow;  }
 .result-data { outline: 1px solid blue; background-color: #F4F4F4; height: 100%; padding: 10px; }
 .item-wrap { outline: 1px solid black; height: 100%; width: 100px; margin: 0 auto;}

@@ -23,7 +23,6 @@ angular.module('bae-synchronous.MainController', [])
       }
     };
 
-
     $scope.splash_submit = function() { $scope.splash = 'no'; };
     $scope.expand_map = function() { $scope.open_map = 'yes'; };
 
@@ -69,6 +68,12 @@ angular.module('bae-synchronous.MainController', [])
                   this.infowindow.open(map, this);
                 });
             }
+            google.maps.event.addListener(map, 'click', function(event) {
+              this.setOptions({scrollwheel: true});
+            });
+            google.maps.event.addListener(map, 'mouseout', function(event){
+              this.setOptions({scrollwheel:false});
+            });
             console.log('were here');
             $scope.open_map = 'yes';
           }
