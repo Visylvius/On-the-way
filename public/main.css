@@ -6,18 +6,6 @@ input {
   width: 250px;
 }
 
-.map-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
-
-#map {
-    height: 100% !important;
-    padding-bottom: 50%;
-    position: relative;
-    width: 100%;
-}
 /*redo css*/
 
 select.soflow {
@@ -107,13 +95,40 @@ md-card:last-child {
   display: none;
 }
 .failure-yes {
+  height: 100vh;
   display: block;
+  background-image: url('./error-picture.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 50% 50%;
+  padding: 50px 0px;
+  display: block;
+  color: black;
+  background-color: white;
 }
 .failure-no {
   display: none;
 }
+
 .map-wrap-yes {
    width: 100%;
    height: 100%;
    display: inline-block;
+}
+
+.map-wrap-no {
+  display: none;
+}
+
+.map-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+#map {
+    height: 100% !important;
+    padding-bottom: 50%;
+    position: relative;
+    width: 100%;
 }

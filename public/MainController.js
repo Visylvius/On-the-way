@@ -12,7 +12,7 @@ angular.module('bae-synchronous.MainController', [])
     $scope.open_map = 'no';
     $scope.splash = 'yes';
     $scope.failure = 'no';
-  
+
     $scope.hasFailed = function() {
       if (!$scope.validListings) {
         $scope.failure = 'yes' ;
@@ -75,6 +75,7 @@ angular.module('bae-synchronous.MainController', [])
           }
           else {
             $scope.validListings = false;
+            $scope.hasFailed();
           }
       }
     });
