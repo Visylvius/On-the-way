@@ -13,6 +13,7 @@ angular.module('bae-synchronous.MainController', [])
     $scope.splash = 'yes';
     $scope.failure = 'no';
 
+
     $scope.hasFailed = function() {
       if (!$scope.validListings) {
         $scope.failure = 'yes' ;
@@ -43,6 +44,7 @@ angular.module('bae-synchronous.MainController', [])
               if ($scope.validListings) {
                 $scope.failure = 'no';
               }
+              google.maps.event.trigger(map, 'resize');
               var marker3 = Marker.makeMarker($scope.listings.address1.coordinates, map);
               var marker4 = Marker.makeMarker($scope.listings.address2.coordinates, map);
 
@@ -71,6 +73,7 @@ angular.module('bae-synchronous.MainController', [])
                   this.infowindow.open(map, this);
                 });
             }
+
             google.maps.event.addListener(map, 'click', function(event) {
               this.setOptions({scrollwheel: true});
             });
