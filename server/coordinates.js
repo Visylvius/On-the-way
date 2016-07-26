@@ -50,7 +50,7 @@ function getPlaces(coordinates,radius,type, name){
       radius: radius,
       type: type,
       // name: name, // filtering results by name is possible via this parameter
-      key: process.env.APIKEY
+      key: process.env.IP.APIKEY
     }
   })
   .then(function (response) {
