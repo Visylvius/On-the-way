@@ -6,15 +6,24 @@ input {
   width: 250px;
 }
 
-.map-container {
+.map-container-yes {
   position: absolute;
   width: 100%;
   height: 100%;
 }
 
+.map-container-no {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  bottom: 0;
+}
+
 #map {
+    height: 100% !important;
     padding-bottom: 50%;
     position: relative;
+    width: 100%;
 }
 /*redo css*/
 
@@ -59,8 +68,7 @@ select.soflow {
 
 .result-container-yes {
   visibility: hidden;
-  position: absolute;
-  bottom: 0;
+  height: 0;
 }
 
 .pure-form-stacked {
@@ -86,17 +94,6 @@ md-card:last-child {
   padding-top: 0;
 }
 
-@media (max-width: 900px) {
-  .result-container {
-    flex-direction: column;
-  }
-  .result__listing__wrap {
-    width: 100%;
-    height: 400px;
-    oveflow-y: hidden;
-    overflow-x: scroll;
-  }
-}
 .splash-yes {
   background-image: url('./laptop.jpeg');
   background-repeat: no-repeat;
@@ -123,8 +120,7 @@ md-card:last-child {
 }
 .map-wrap-no {
   visibility: hidden;
-  position: absolute;
-  bottom: 0;
+  height: 0;
 }
 .failure-yes {
   height: 100vh;
@@ -140,4 +136,23 @@ md-card:last-child {
 }
 .failure-no {
   display: none;
+}
+
+@media (max-width: 900px) {
+  .result-container {
+    flex-direction: column;
+  }
+  .result__listing__wrap {
+    width: 100%;
+    height: auto;
+    oveflow-y: hidden;
+    overflow-x: scroll;
+  }
+  .result-container-no {
+    display: block;
+    height: 718px;
+  }
+  .map-wrap-yes {
+    height: auto;
+  }
 }

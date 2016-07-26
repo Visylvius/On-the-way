@@ -96,8 +96,8 @@
          </div>
            <div class="map-wrap-{{ open_map }}" id='map-data'>
              <!-- needs this div map-container set to height 100% and width 100% or else it won't render properly -->
-             <div class="map-container">
-              <div id='map' width='100%' style='height: 100vh'></div>
+             <div class="map-container-{{ open_map }}">
+              <div id='map'></div>
              </div>
            </div>
        </div>
@@ -118,6 +118,7 @@
               },
               zoom: 8
              });
+             google.maps.event.trigger(map, 'resize');
             }
          </script>
        </div>
