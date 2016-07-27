@@ -28,22 +28,22 @@
        <form class="pure-form pure-form-stacked">
         <fieldset>
         <div class="pure-g">
-           <div class="pure-u-1 pure-u-md-1-5">
+           <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
              <label for="home-address">Point A</label>
              <input id="homeAddress" ng-model='homeAddress' class="pure-u-8.5-24" type="text" placeholder="Enter Origin Address">
            </div>
-           <div class="pure-u-1 pure-u-md-1-5">
+           <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
              <label for="work-address">Point B</label>
              <input id="workAddress" ng-model='workAddress' class="pure-u-8.5-24" type="text" placeholder="Enter Destination Address">
            </div>
-           <div class="pure-u-1 pure-u-md-1-5">
+           <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
              <label for="category">Categories</label>
              <select id="location" ng-required='!selectedPlace' ng-model='selectedPlace' class="pure-input-23-24 soflow">
                  <option>Select an option</option>
                  <option ng-repeat='place in places'>{{place}}</option>
              </select>
            </div>
-           <div class="pure-u-1 pure-u-md-1-5">
+           <div class="pure-u-1 pure-u-md-1-2 pure-u-lg-1-4">
              <label for="maximum-duration">Maximum Duration</label>
              <select id="time" ng-model='time' class="pure-input-23-24 soflow">
                <option value='5'>5 Minutes</option>
