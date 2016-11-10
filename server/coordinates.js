@@ -24,7 +24,7 @@ function getCoordinates(address){
   return axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
       params: {
         address: address,
-        key: process.env.STEVE_KEY
+        key: process.env.GEOCODINGKEY
       }
     })
     .then(function (response) {
